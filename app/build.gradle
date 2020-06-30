@@ -1,0 +1,64 @@
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("com.apollographql.apollo").version("2.2.1")
+}
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId "com.dessert"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.border.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.border.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.border.espresso:espresso-core:3.2.0'
+
+    def appcompat_version = "1.1.0"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    implementation("com.squareup.okhttp3:okhttp:4.7.2")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.7.2")
+    //New version 2.1.1
+    implementation("com.apollographql.apollo:apollo-runtime:2.2.1")
+    implementation("com.apollographql.apollo:apollo-coroutines-support:2.2.1")
+}
+
+apollo {
+    generateKotlinModels.set(true)
+}
