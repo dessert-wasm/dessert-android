@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.dessert.MainActivity
 
 import com.dessert.R
 import com.dessert.data.model.LoggedInUser
@@ -62,12 +63,11 @@ class LoginActivity : AppCompatActivity() {
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
                 setResult(Activity.RESULT_OK)
-                /*val intent = Intent(this, DashboardFragment::class.java).apply {
+                val intent = Intent(this, MainActivity::class.java).apply {
                     putExtra("id", loginResult.success.userId)
                 }
-                startActivity(intent)*/
-                //Complete and destroy login activity once successful
                 finish()
+                startActivity(intent)
             }
         })
 
