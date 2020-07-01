@@ -18,6 +18,11 @@ import android.content.Intent
 
 import com.dessert.R
 import com.dessert.ui.subscription.SubscriptionActivity
+import com.dessert.MainActivity
+
+import com.dessert.data.model.LoggedInUser
+import com.dessert.ui.dashboard.DashboardFragment
+import com.dessert.ui.home.HomeFragment
 
 class LoginActivity : AppCompatActivity() {
 
@@ -33,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
-                .get(LoginViewModel::class.java)
+        loginViewModel =
+            ViewModelProviders.of(this, LoginViewModelFactory()).get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -59,35 +64,37 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
+                setResult(Activity.RESULT_OK)
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("id", loginResult.success.userId)
+                }
+                finish()
+                startActivity(intent)
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
         })
 
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
+                username.text.toString(),
+                password.text.toString()
             )
         }
 
         password.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                        username.text.toString(),
-                        password.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                                username.text.toString(),
-                                password.text.toString()
-                        )
+                    EditorInfo.IME_ACTION_DONE -> {
+                        loading.visibility = View.VISIBLE
+                        loginViewModel.login(username.text.toString(), password.text.toString())
+                    }
+
                 }
                 false
             }
@@ -99,21 +106,20 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Subscription "No account" Button
-        findViewById<Button>(R.id.no_account).setOnClickListener {
+        findViewById<Button>(R.id.register).setOnClickListener {
             val intent = Intent(this, SubscriptionActivity::class.java)
             startActivity(intent)
-
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
+    private fun updateUiWithUser(model: LoggedInUser) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
         Toast.makeText(
-                applicationContext,
-                "$welcome $displayName",
-                Toast.LENGTH_LONG
+            applicationContext,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
         ).show()
     }
 
