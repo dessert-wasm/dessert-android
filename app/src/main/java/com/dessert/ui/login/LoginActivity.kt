@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 updateUiWithUser(loginResult.success)
                 setResult(Activity.RESULT_OK)
                 val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra("id", loginResult.success.userId)
+                    putExtra("ID", loginResult.success.userId)
                 }
                 finish()
                 startActivity(intent)

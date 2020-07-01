@@ -1,6 +1,7 @@
 package com.dessert
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -20,5 +21,8 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home, R.id.navigation_modules, R.id.navigation_profile))
         navView.setupWithNavController(navController)
+
+
+        //get ID
     }
 }
