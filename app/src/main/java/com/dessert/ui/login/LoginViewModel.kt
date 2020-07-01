@@ -1,5 +1,6 @@
 package com.dessert.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,17 +28,20 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             if (result is Result.Success) {
                 _loginResult.postValue(LoginResult(success = result.data))
             } else {
+                //TODO CHECK LE MESSAGE DERREUR POUR VOIS SI ON A INTERNET
                 _loginResult.postValue(LoginResult(error = R.string.login_failed))
             }
         }
     }
 
     fun loginDataChanged(username: String, password: String) {
+        _loginForm.value = LoginFormState(isDataValid = true)
+
         if (!isUserNameValid(username)) {
             _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)) {
+        } /*else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
-        } else {
+        }*/ else {
             _loginForm.value = LoginFormState(isDataValid = true)
         }
     }
@@ -47,7 +51,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else {
-            username.isNotBlank()
+            false
         }
     }
 

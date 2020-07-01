@@ -18,7 +18,7 @@ class LoginDataSource {
         val response = try {
             apolloClient.mutate(LoginMutation(username, password, true)).toDeferred().await();
         } catch (e: ApolloException) {
-            return Result.Error(IOException("Request login failed in", e))
+            return Result.Error(IOException("(LOGIN) Request failed: ", e))
         }
 
         if (!response.hasErrors()) {
@@ -26,7 +26,7 @@ class LoginDataSource {
 
             return Result.Success(LoggedInUser(id, username))
         }
-        return Result.Error(IOException("Wrong login"))
+        return Result.Error(IOException("(LOGIN) Wrong inputs"))
     }
 
     fun logout() {
