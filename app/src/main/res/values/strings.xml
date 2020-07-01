@@ -17,6 +17,10 @@
     <string name="login_failed">"Login failed"</string>
     <!-- Strings related to Main -->
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_modules">Modules</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- Strings related to Profile -->
+    <string name="profile_username">\@username</string>
+    <string name="profile_logout">Logout</string>
 </resources>

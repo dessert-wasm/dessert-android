@@ -21,8 +21,6 @@ import com.dessert.ui.subscription.SubscriptionActivity
 import com.dessert.MainActivity
 
 import com.dessert.data.model.LoggedInUser
-import com.dessert.ui.dashboard.DashboardFragment
-import com.dessert.ui.home.HomeFragment
 
 class LoginActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.dessert.ui.dashboard
+package com.dessert.ui.modules
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dessert.R
 
-class DashboardFragment : Fragment() {
+class ModulesFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var modulesViewModel: ModulesViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        modulesViewModel =
+                ViewModelProviders.of(this).get(ModulesViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_modules, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        modulesViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
