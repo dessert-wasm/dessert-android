@@ -14,8 +14,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import android.content.Intent
 
 import com.dessert.R
+import com.dessert.ui.subscription.SubscriptionActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -94,6 +96,13 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+        }
+
+        // Subscription "No account" Button
+        findViewById<Button>(R.id.no_account).setOnClickListener {
+            val intent = Intent(this, SubscriptionActivity::class.java)
+            startActivity(intent)
+
         }
     }
 
