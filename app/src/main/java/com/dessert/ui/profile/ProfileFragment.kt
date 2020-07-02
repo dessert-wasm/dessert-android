@@ -1,10 +1,12 @@
 package com.dessert.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -26,6 +28,8 @@ import kotlinx.coroutines.runBlocking
 
 
 import com.dessert.R
+import com.dessert.ui.login.LoginActivity
+import com.dessert.ui.subscription.SubscriptionActivity
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -33,13 +37,21 @@ class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
     val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
+
+
+
+
+        val logout = root.findViewById<Button>(R.id.logout)
+
+        logout.setOnClickListener {
+            val intent = Intent(this.activity, LoginActivity::class.java)
+
+            requireActivity().finish();
+            requireActivity().startActivity(intent)
+        }
 
 
         val id = requireActivity().intent.extras!!.getInt("ID");
