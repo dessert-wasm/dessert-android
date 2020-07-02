@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">Dessert</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_username">Email</string>
-    <string name="placeholder_username">Enter Email</string>
+    <!-- Strings related to login and register -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+    <string name="placeholder_email">Enter email</string>
+    <string name="placeholder_username">Enter username</string>
     <string name="prompt_password">Password</string>
     <string name="placeholder_password">Enter password</string>
 
-    <string name="action_sign_in">Login</string>
+    <string name="action_log_in">Login</string>
+    <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register"><u><b>No account?</b></u> </string>
 

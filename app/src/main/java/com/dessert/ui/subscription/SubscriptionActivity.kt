@@ -11,8 +11,8 @@ class SubscriptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscription)
 
-        val myWebView: WebView = findViewById(R.id.webview)
-        myWebView.loadUrl("https://develop.dessert.dev/sign")
+//        val myWebView: WebView = findViewById(R.id.webview)
+//        myWebView.loadUrl("https://develop.dessert.dev/sign")
     }
 }
 
