@@ -10,11 +10,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
 import android.content.Intent
+import android.widget.*
 
 import com.dessert.R
 import com.dessert.ui.subscription.SubscriptionActivity
@@ -104,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Subscription "No account" Button
-        findViewById<Button>(R.id.register).setOnClickListener {
+        findViewById<TextView>(R.id.register).setOnClickListener {
             val intent = Intent(this, SubscriptionActivity::class.java)
             startActivity(intent)
         }

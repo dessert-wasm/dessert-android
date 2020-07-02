@@ -22,10 +22,10 @@ class ModulesFragment : Fragment() {
         modulesViewModel =
                 ViewModelProviders.of(this).get(ModulesViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_modules, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        modulesViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = root.findViewById(R.id.modules_result)
+//        modulesViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
         return root
     }
 }

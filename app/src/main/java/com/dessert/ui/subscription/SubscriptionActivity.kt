@@ -12,7 +12,7 @@ class SubscriptionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_subscription)
 
         val myWebView: WebView = findViewById(R.id.webview)
-        myWebView.loadUrl("http://dessert.dev")
+        myWebView.loadUrl("https://develop.dessert.dev/sign")
     }
 }
 
