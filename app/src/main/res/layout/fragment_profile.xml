@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
     android:clickable="true"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".ui.profile.ProfileFragment"
+    android:focusable="true">
 
 
     <TextView
@@ -58,6 +59,7 @@
         android:background="@color/colorPrimary"
         android:text="@string/profile_logout"
         android:textColor="#FFFFFF"
+        android:stateListAnimator="@null"
         app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="@+id/tokens_list"
         app:layout_constraintTop_toBottomOf="@+id/tokens_list" />
@@ -112,8 +114,17 @@
         android:layout_marginTop="8dp"
         android:background="#E0E0E0"
         android:text="@string/profile_documentation"
+        android:stateListAnimator="@null"
         app:elevation="0dp"
         app:layout_constraintStart_toStartOf="@+id/tokens_list"
         app:layout_constraintTop_toBottomOf="@+id/tokens_list" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
