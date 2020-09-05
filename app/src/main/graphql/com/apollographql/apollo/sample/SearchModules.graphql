@@ -1,0 +1,22 @@
+query Search($search: String!, $type: ModuleTypeEnum, $pagination: PaginationQueryInput!) {
+    search(query: $search, type: $type, pagination: $pagination) {
+        totalPages
+        totalRecords
+        pageNumber
+        pageSize
+        result {
+            id
+            name
+            description
+            publishedDateTime
+            author {
+                id
+                nickname
+            }
+            tags {
+                id
+                name
+            }
+        }
+    }
+}

@@ -61,6 +61,8 @@ dependencies {
     implementation "com.apollographql.apollo:apollo-coroutines-support:2.2.1"
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'me.gujun.android.taggroup:library:1.4@aar'
 }
 
 apollo {

@@ -13,7 +13,4 @@ class ProfileViewModel : ViewModel() {
     lateinit var username: String
     lateinit var profilePicUrl: String
     lateinit var tokens: List<UserQuery.Token>
-
-
-
 }
