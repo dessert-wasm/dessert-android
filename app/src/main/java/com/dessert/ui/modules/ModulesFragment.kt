@@ -1,31 +1,56 @@
 package com.dessert.ui.modules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.annotation.UiThread
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.api.Input
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.coroutines.toDeferred
+import com.apollographql.apollo.exception.ApolloException
+import com.apollographql.apollo.sample.SearchQuery
+import com.apollographql.apollo.sample.UserQuery
+import com.apollographql.apollo.sample.type.ModuleTypeEnum
+import com.apollographql.apollo.sample.type.PaginationQueryInput
 import com.dessert.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.suspendCoroutine
+
 
 class ModulesFragment : Fragment() {
 
-    private lateinit var modulesViewModel: ModulesViewModel
+    //private lateinit var modulesViewModel: ModulesViewModel
+    val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        modulesViewModel =
-                ViewModelProviders.of(this).get(ModulesViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        //modulesViewModel = ViewModelProviders.of(this).get(ModulesViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_modules, container, false)
-//        val textView: TextView = root.findViewById(R.id.modules_result)
-//        modulesViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+
+        val modulesRecyclerView = root.findViewById<RecyclerView>(R.id.modules_list)
+        modulesRecyclerView.layoutManager = LinearLayoutManager(context)
+
+        lifecycleScope.launchWhenResumed {
+            val response = try {
+                apolloClient.query(SearchQuery("", Input.fromNullable(ModuleTypeEnum.CONNECTOR), PaginationQueryInput(true, 0, 50))).toDeferred().await()
+            } catch (e: ApolloException) {
+                Log.i("Modules", "Failure", e)
+                null
+            }
+            modulesRecyclerView.adapter = ModuleDescAdapter(response!!.data!!.search.result!!)
+        }
+
         return root
     }
 }
