@@ -26,6 +26,7 @@
     <!-- Strings related to Profile -->
     <string name="profile_username">\@username</string>
     <string name="profile_logout">Logout</string>
+    <string name="profile_documentation">Docs</string>
 
     <!-- Strings related to Modules -->
     <string name="modules_result">No result found</string>

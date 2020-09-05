@@ -1,5 +1,6 @@
 package com.dessert.ui.profile
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +11,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,8 +28,8 @@ import kotlinx.coroutines.runBlocking
 
 
 import com.dessert.R
+import com.dessert.ui.documentation.DocumentationFragment
 import com.dessert.ui.login.LoginActivity
-import com.dessert.ui.subscription.SubscriptionActivity
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -42,8 +42,6 @@ class ProfileFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
 
 
-
-
         val logout = root.findViewById<Button>(R.id.logout)
 
         logout.setOnClickListener {
@@ -54,6 +52,11 @@ class ProfileFragment : Fragment() {
             requireActivity().startActivity(intent)
         }
 
+        val documentationButton = root.findViewById<Button>(R.id.profile_documentation_button)
+
+        documentationButton.setOnClickListener {
+            childFragmentManager.beginTransaction().replace(  R.id.fragment_profile, DocumentationFragment()).addToBackStack(null).commit()
+        }
 
         val id = requireActivity().intent.extras!!.getInt("ID");
         runBlocking {
