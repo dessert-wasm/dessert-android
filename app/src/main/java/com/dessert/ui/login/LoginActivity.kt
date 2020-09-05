@@ -1,23 +1,22 @@
 package com.dessert.ui.login
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.content.Intent
 import android.widget.*
-
-import com.dessert.R
-import com.dessert.ui.subscription.SubscriptionActivity
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.dessert.MainActivity
-
+import com.dessert.R
 import com.dessert.data.model.LoggedInUser
+import com.dessert.ui.subscription.SubscriptionActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -103,7 +102,25 @@ class LoginActivity : AppCompatActivity() {
         // Subscription "No account" Button
         findViewById<TextView>(R.id.register).setOnClickListener {
             val intent = Intent(this, SubscriptionActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 1);
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            val id = data!!.getIntExtra("ID", -1)
+
+            if (id == - 1) {
+                setResult(Activity.RESULT_OK)
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("ID", id.toString())
+                }
+                finish()
+                startActivity(intent)
+            }
         }
     }
 

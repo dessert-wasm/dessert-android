@@ -139,7 +139,7 @@
         android:layout_gravity="start"
         android:layout_marginTop="32dp"
         android:background="@color/colorPrimary"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/action_sign_up"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
