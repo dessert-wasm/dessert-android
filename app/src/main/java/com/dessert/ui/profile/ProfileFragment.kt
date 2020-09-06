@@ -58,6 +58,7 @@ class ProfileFragment : Fragment() {
             childFragmentManager.beginTransaction().replace(  R.id.fragment_profile, DocumentationFragment()).addToBackStack(null).commit()
         }
 
+
         val id = requireActivity().intent.extras!!.getInt("ID");
         runBlocking {
             getUserInfos(id)

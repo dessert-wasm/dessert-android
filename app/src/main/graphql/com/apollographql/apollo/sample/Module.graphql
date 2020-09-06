@@ -1,0 +1,13 @@
+query Module($id: Int!) {
+    module(id: $id) {
+        id
+        name
+        description
+        isCore
+        author {
+            id
+            nickname
+        }
+        githubLink
+    }
+}
