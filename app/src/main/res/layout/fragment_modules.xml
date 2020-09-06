@@ -25,16 +25,31 @@
 
     <SearchView
         android:id="@+id/search_modules"
-        android:layout_width="292dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="@drawable/border"
-        android:iconifiedByDefault="false"
-        android:queryHint='"Search anything..."'
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title2" />
+        app:layout_constraintTop_toBottomOf="@+id/title2"
+        android:iconifiedByDefault="false"
+        android:queryHint='"Search anything..."' />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/module_description_border"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@+id/search_modules"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_modules" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/modules_list"
@@ -46,4 +61,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_modules" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
