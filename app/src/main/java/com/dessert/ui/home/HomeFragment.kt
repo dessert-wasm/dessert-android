@@ -38,13 +38,9 @@ class HomeFragment : Fragment() {
                 Log.i("Home", "Failure", e)
                 null
             }
-            modulesRecyclerView.adapter = HomeDescAdapter(response!!.data!!.user.modules.result!!)
+            modulesRecyclerView.adapter = HomeDescAdapter(response!!.data!!.user.modules.result!!, childFragmentManager)
 
         }
-//        val textView: TextView = root.findViewById(R.id.text_home)
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
         return root
     }
 }
