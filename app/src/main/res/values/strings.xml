@@ -18,15 +18,31 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- Common strings -->
+    <string name="title_dessert">Dessert</string>
+
     <!-- Strings related to Main -->
     <string name="title_home">Home</string>
     <string name="title_modules">Modules</string>
     <string name="title_profile">Profile</string>
 
+    <!-- Strings related to Home (my modules) -->
+    <string name="home_title">My modules</string>
+
     <!-- Strings related to Profile -->
     <string name="profile_username">\@username</string>
+    <string name="profile_title">Profile</string>
     <string name="profile_logout">Logout</string>
     <string name="profile_documentation">Docs</string>
+    <string name="profile_tokens_title">Tokens</string>
+
+    <!-- Strings related to Documentation -->
+    <string name="documentation_title">Documentation</string>
+    <string name="documentation_who_are_we">Who Are We ?</string>
+    <string name="documentation_why_dessert">Why Dessert ?</string>
+    <string name="documentation_quickstart_guide">Quickstart Guide</string>
+    <string name="documentation_cli">CLI Documentation</string>
 
     <!-- Strings related to Modules -->
     <string name="modules_result">No result found</string>
