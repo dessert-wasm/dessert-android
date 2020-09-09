@@ -39,10 +39,10 @@
 
     <!-- Strings related to Documentation -->
     <string name="documentation_title">Documentation</string>
-    <string name="documentation_who_are_we">Who Are We ?</string>
-    <string name="documentation_why_dessert">Why Dessert ?</string>
-    <string name="documentation_quickstart_guide">Quickstart Guide</string>
-    <string name="documentation_cli">CLI Documentation</string>
+    <string name="documentation_who_are_we"><a href="https://bit.ly/32ethhZ">Who Are We ?</a></string>
+    <string name="documentation_why_dessert"><a href="https://bit.ly/35ksr4W">Why Dessert ?</a></string>
+    <string name="documentation_quickstart_guide"><a href="https://bit.ly/2ZpeLBU">Quickstart Guide</a></string>
+    <string name="documentation_cli"><a href="https://bit.ly/2GKQoIC">CLI Documentation</a></string>
 
     <!-- Strings related to Modules -->
     <string name="modules_result">No result found</string>
