@@ -55,7 +55,7 @@ class ModuleDescAdapter(val results: List<SearchQuery.Result?>, val fragmentMana
 
             arguments.putInt("id", result!!.id)
             fragment.arguments = arguments
-            fragmentManager.beginTransaction().replace(R.id.fragment_module, fragment).addToBackStack(null).commit()
+            fragmentManager.beginTransaction().replace(R.id.fragment_modules, fragment).addToBackStack(null).commit()
         }
     }
 

@@ -21,6 +21,7 @@ import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.sample.UserQuery
 import com.apollographql.apollo.sample.type.PaginationQueryInput
+import com.dessert.CustomApolloClient
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -33,9 +34,7 @@ import com.dessert.ui.login.LoginActivity
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
-
     private lateinit var profileViewModel: ProfileViewModel
-    val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
@@ -87,7 +86,7 @@ class ProfileFragment : Fragment() {
 
     suspend fun getUserInfos(id: Int): Response<UserQuery.Data> {
         return suspendCoroutine { continuation ->
-            apolloClient.query(UserQuery(id, PaginationQueryInput(true, 0, 20)))
+            CustomApolloClient.client.query(UserQuery(id, PaginationQueryInput(true, 0, 20)))
                 .enqueue(object : ApolloCall.Callback<UserQuery.Data>() {
                     override fun onFailure(e: ApolloException) {
                         TODO("Not yet implemented")

@@ -18,12 +18,13 @@ import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.sample.SearchQuery
 import com.apollographql.apollo.sample.type.ModuleTypeEnum
 import com.apollographql.apollo.sample.type.PaginationQueryInput
+import com.dessert.CustomApolloClient
 import com.dessert.R
 
 
 class ModulesFragment : Fragment() {
-    private var moduleType = ModuleTypeEnum.CORE
-    private val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
+    private var query = ""
+    private var moduleType = ModuleTypeEnum.CONNECTOR
     private lateinit var modulesRecyclerView : RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,12 +32,12 @@ class ModulesFragment : Fragment() {
         val searchBar = root.findViewById<SearchView>(R.id.search_modules)
 
         searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onQueryTextSubmit(text: String?): Boolean {
                 searchBar.clearFocus()
-                searchBar.setQuery("", false)
                 //TODO ADD PROGRESS BAR
                 //TODO ADD NOT FOUND IF NO RESULT
-                sendQuery(query!!, moduleType)
+                query = text!!
+                sendQuery(query, moduleType)
                 return true
             }
 
@@ -47,31 +48,29 @@ class ModulesFragment : Fragment() {
 
         val spinner = root.findViewById<Spinner>(R.id.spinner)
 
-
-        /*createFromResource(requireContext(), *arrayOf("CORE", "CONNECTOR"), android.R.layout.simple_spinner_item).also*/
         ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("CORE", "CONNECTOR")).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
 
-        spinner.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (position == 0) {
                     moduleType = ModuleTypeEnum.CORE
+                    sendQuery(query, moduleType)
                 } else {
                     moduleType = ModuleTypeEnum.CONNECTOR
+                    sendQuery(query, moduleType)
                 }
             }
-        })
+        }
 
         modulesRecyclerView = root.findViewById<RecyclerView>(R.id.modules_list)
         modulesRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        sendQuery("", moduleType)
+        sendQuery(query, moduleType)
         return root
     }
 
@@ -79,7 +78,7 @@ class ModulesFragment : Fragment() {
     fun sendQuery(query: String, moduleType: ModuleTypeEnum) {
         lifecycleScope.launchWhenResumed {
             val response = try {
-                apolloClient.query(SearchQuery(query, Input.fromNullable(moduleType), PaginationQueryInput(true, 0, 8))).toDeferred().await()
+                CustomApolloClient.client.query(SearchQuery(query, Input.fromNullable(moduleType), PaginationQueryInput(true, 0, 15))).toDeferred().await()
             } catch (e: ApolloException) {
                 Log.i("Modules", "Failure", e)
                 null

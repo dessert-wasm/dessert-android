@@ -14,16 +14,11 @@ import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.sample.UserQuery
 import com.apollographql.apollo.sample.type.PaginationQueryInput
+import com.dessert.CustomApolloClient
 import com.dessert.R
 
 class HomeFragment : Fragment() {
-    val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val modulesRecyclerView = root.findViewById<RecyclerView>(R.id.modules_list)
         modulesRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -32,14 +27,12 @@ class HomeFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             val response = try {
-                apolloClient.query(UserQuery(id, PaginationQueryInput(true, 0, 50))).toDeferred()
-                    .await()
+                CustomApolloClient.client.query(UserQuery(id, PaginationQueryInput(true, 0, 50))).toDeferred().await()
             } catch (e: ApolloException) {
                 Log.i("Home", "Failure", e)
                 null
             }
             modulesRecyclerView.adapter = HomeDescAdapter(response!!.data!!.user.modules.result!!, childFragmentManager)
-
         }
         return root
     }

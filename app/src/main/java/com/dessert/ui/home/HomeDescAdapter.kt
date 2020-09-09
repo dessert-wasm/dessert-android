@@ -54,7 +54,7 @@ class HomeDescAdapter(val results: List<UserQuery.Result?>, val fragmentManager:
 
             arguments.putInt("id", result.id)
             fragment.arguments = arguments
-            fragmentManager.beginTransaction().replace(R.id.fragment_module, fragment).addToBackStack(null).commit()
+            fragmentManager.beginTransaction().replace(R.id.fragment_home, fragment).addToBackStack(null).commit()
         }
     }
 

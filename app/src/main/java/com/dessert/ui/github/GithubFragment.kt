@@ -14,17 +14,12 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.sample.ModuleQuery
+import com.dessert.CustomApolloClient
 import com.dessert.R
 
 
 class GithubFragment : Fragment() {
-    val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_github, container, false)
 
         if (requireArguments().containsKey("id")) {
@@ -32,7 +27,7 @@ class GithubFragment : Fragment() {
 
             lifecycleScope.launchWhenResumed {
                 val response = try {
-                    apolloClient.query(ModuleQuery(id)).toDeferred().await()
+                    CustomApolloClient.client.query(ModuleQuery(id)).toDeferred().await()
                 } catch (e: ApolloException) {
                     Log.i("Modules", "Failure", e)
                     null

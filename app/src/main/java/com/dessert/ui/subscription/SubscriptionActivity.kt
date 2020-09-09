@@ -11,6 +11,7 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.sample.RegisterMutation
+import com.dessert.CustomApolloClient
 
 import com.dessert.R
 
@@ -26,9 +27,7 @@ class SubscriptionActivity : AppCompatActivity() {
 
         register.setOnClickListener {
             if (!email.text.isEmpty() && !username.text.isEmpty() && !password.text.isEmpty()) {
-                val apolloClient = ApolloClient.builder().serverUrl("https://dev.dessert.vodka").build()
-
-                apolloClient.mutate(
+                CustomApolloClient.client.mutate(
                     RegisterMutation(email = email.text.toString(), nickname = username.text.toString(), password = password.text.toString())
                 )
                     .enqueue(object : ApolloCall.Callback<RegisterMutation.Data>() {
