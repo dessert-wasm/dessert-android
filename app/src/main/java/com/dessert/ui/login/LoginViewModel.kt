@@ -1,5 +1,6 @@
 package com.dessert.ui.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,7 +48,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
         } else {
-            username.isNotBlank()
+            return true;
         }
     }
 

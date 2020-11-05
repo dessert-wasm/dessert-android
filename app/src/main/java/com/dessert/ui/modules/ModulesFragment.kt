@@ -48,7 +48,7 @@ class ModulesFragment : Fragment() {
 
         val spinner = root.findViewById<Spinner>(R.id.spinner)
 
-        ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("CORE", "CONNECTOR")).also { adapter ->
+        ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("CONNECTOR", "CORE")).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
