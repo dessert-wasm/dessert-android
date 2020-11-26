@@ -1,16 +1,14 @@
 package com.dessert.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
+import com.dessert.R
 import com.dessert.data.LoginRepository
 import com.dessert.data.Result
-
-import com.dessert.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -43,10 +41,19 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         }
     }
 
+    val EMAIL_ADDRESS_PATTERN: Pattern = Pattern.compile(
+        "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                "\\@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                "(" +
+                "\\." +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                ")+"
+    )
     // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
+            EMAIL_ADDRESS_PATTERN.matcher(username).matches()
         } else {
             return true;
         }
