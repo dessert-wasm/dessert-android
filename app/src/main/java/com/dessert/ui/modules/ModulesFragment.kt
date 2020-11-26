@@ -33,8 +33,6 @@ class ModulesFragment : Fragment() {
         searchBar.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {
                 searchBar.clearFocus()
-                //TODO ADD PROGRESS BAR
-                //TODO ADD NOT FOUND IF NO RESULT
                 query = text!!
                 sendQuery(query, moduleType)
                 return true
@@ -57,10 +55,10 @@ class ModulesFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 if (position == 0) {
-                    moduleType = ModuleTypeEnum.CORE
+                    moduleType = ModuleTypeEnum.CONNECTOR
                     sendQuery(query, moduleType)
                 } else {
-                    moduleType = ModuleTypeEnum.CONNECTOR
+                    moduleType = ModuleTypeEnum.CORE
                     sendQuery(query, moduleType)
                 }
             }
@@ -73,7 +71,6 @@ class ModulesFragment : Fragment() {
         return root
     }
 
-    //TODO FAIRE LA PREMIERE QUERY DANS LA MAINACTIVITY COMME SI ON CHANGE ON GARDERA LE MEME RESULTAT
     fun sendQuery(query: String, moduleType: ModuleTypeEnum) {
         lifecycleScope.launchWhenResumed {
             val response = try {
